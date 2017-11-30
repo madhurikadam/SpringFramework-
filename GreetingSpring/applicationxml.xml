@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
+	<bean id="id1" class="com.madhuri.GreetingImpl" init-method="init"
+		scope="prototype">
+		<!-- Constructor Based Wiring -->
+		<constructor-arg>
+			<value>MadhuriKadam</value>
+		</constructor-arg>
+	</bean>
+	<bean name="GreetMessage" class="com.madhuri.GreetingMessages" abstract="true">
+		<property name="name" value="Pooja" />
+		<property name="message" value="Is the best" />
+	</bean>
+	<bean id="madhuri" parent="GreetMessage" class="com.madhuri.GreetingImpl">
+		<!-- Setter Based Wiring -->
+		<property name="greeting">
+			<value>madhuri</value>
+		</property>
+	</bean>
+	<bean id="ArrayGreet" class="com.madhuri.ArrayGreet">
+		<!-- Constructor Based Array type Wiring -->
+		<constructor-arg>
+			<array>
+				<value>madhuri</value>
+				<value>kadam</value>
+			</array>
+		</constructor-arg>
+	</bean>
+
+	<bean id="ArrayGreetSetter" class="com.madhuri.ArrayGreet">
+		<!-- Setter Based Array type Wiring -->
+		<property name="greeting">
+			<array>
+				<value>madhuri</value>
+				<value>kadam</value>
+			</array>
+		</property>
+	</bean>
+
+	<bean id="ArrayGreetSet" class="com.madhuri.ArrayGreet">
+		<!-- Setter Based Set type Wiring -->
+		<property name="greeting">
+			<set>
+				<value>madhuriSet</value>
+				<value>kadamSet</value>
+			</set>
+		</property>
+	</bean>
+</beans>
+		
+		
