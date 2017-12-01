@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+<bean id="eddie" class="com.madhuri.InstrumentalistDec">
+		<property name="im">
+			<!-- inner bean -->
+			<bean class="com.madhuri.GuitarDec" />
+		</property>
+	</bean>
+		<bean id="audience" class="com.madhuri.AudienceDec" />
+			<aop:config>
+		<aop:aspect ref="audience">	<aop:pointcut id="performance"
+				expression="execution(* com.madhuri.PerformerDec.perform(..))" />
+			<aop:before pointcut-ref="performance" method="takeSeats()" />
+			<aop:before pointcut-ref="performance" method="turnOffCellPhones" />
+			<aop:after-returning pointcut-ref="performance"
+				method="applaud" />
+				<aop:around pointcut-ref="performance" method="watchPerformance"/>
+				</aop:aspect>
+	</aop:config>
+	
+	</beans>
